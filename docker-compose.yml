@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  web:
+    build:  # needs dockerfile
+      context: . # specifying where we want the files and folders for the image be pulled from
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+
+  tests:
+    build:  # needs dockerfile
+      context: . # specifying where we want the files and folders for the image be pulled from
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"] # pverrides CMD in dockerfile
