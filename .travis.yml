@@ -1,9 +1,9 @@
 sudo: required
+language: generic
 servis: # tell travis we need a copy of docker running
   - docker
-
 before_install: # build our image using dockerfile.dev
   - docker build -t vaztimur/docker-react -f Dockerfile.dev .
 
 script: # tell travis how to run our test suite
-  - docker run vaztimur/docker-react npm run test -- --coverage # -- -- coverage leads the test to end status code
+  - docker run -e CI=true vaztimur/docker-react npm run test # -- -- coverage leads the test to end status code
